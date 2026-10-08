@@ -27,16 +27,16 @@ export default class Grafo {
     return soma / 2;
   }
 
-  adicionarVertice(tipo, id, nome) {
+  adicionarVertice(tipo, chave, nome, id = chave) {
     const colecao = tipo === ATOR ? this.atores : this.filmes;
 
-    if (!colecao.has(id)) {
-      const vertice = { chave: `${tipo}:${id}`, tipo, id, nome };
-      colecao.set(id, vertice);
+    if (!colecao.has(chave)) {
+      const vertice = { chave: `${tipo}:${chave}`, tipo, id, nome };
+      colecao.set(chave, vertice);
       this.adjacencias.set(vertice, []);
     }
 
-    return colecao.get(id);
+    return colecao.get(chave);
   }
 
   adicionarAresta(verticeA, verticeB) {
@@ -55,9 +55,10 @@ export default class Grafo {
     for (const { id, title, cast } of listaFilmes) {
       const titulo = limparTexto(title);
       const elenco = Array.isArray(cast) ? cast.map(limparTexto).filter(Boolean) : [];
-      if (!titulo || elenco.length === 0) continue;
+      if (!titulo) continue;
 
-      const filme = this.adicionarVertice(FILME, id, titulo);
+      // Entradas com o mesmo título viram um único vértice de filme, mesmo sem elenco.
+      const filme = this.adicionarVertice(FILME, titulo, titulo, id);
       for (const nome of elenco) {
         this.adicionarAresta(filme, this.adicionarVertice(ATOR, nome, nome));
       }
