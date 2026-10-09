@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import './App.css';
 import Cabecalho from './componentes/Cabecalho';
 import CampoAtor from './componentes/CampoAtor';
+import BotaoTopo from './componentes/BotaoTopo';
 import ListaAdjacencias from './componentes/ListaAdjacencias';
 import PainelResultado from './componentes/PainelResultado';
 import { IconeCaminho, IconeDado, IconeRede, IconeSeta, IconeTrocar } from './componentes/Icones';
@@ -175,6 +176,8 @@ export default function App() {
 
         <ListaAdjacencias grafo={grafo} />
       </main>
+
+      <BotaoTopo />
 
       <footer className="rodape">
         Grafo não direcionado representado por lista de adjacências · Busca em Largura (BFS)

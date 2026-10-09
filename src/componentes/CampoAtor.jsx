@@ -2,7 +2,7 @@ import { useImperativeHandle, useMemo, useRef, useState } from 'react';
 import Avatar from './Avatar';
 import { IconeAlerta, IconeBusca, IconeFechar } from './Icones';
 import { localizar, normalizar } from '../utils/busca';
-import { formatarNumero, pluralizar } from '../utils/formatacao';
+import { pluralizar } from '../utils/formatacao';
 
 const manterFoco = (evento) => evento.preventDefault();
 
@@ -20,7 +20,7 @@ function NomeDestacado({ nome, busca, consulta }) {
   );
 }
 
-function Ajuda({ id, erro, selecionado, totalAtores }) {
+function Ajuda({ id, erro, selecionado }) {
   if (erro) {
     return (
       <p id={id} className="campo-ator__ajuda campo-ator__ajuda--erro">
@@ -32,9 +32,7 @@ function Ajuda({ id, erro, selecionado, totalAtores }) {
 
   return (
     <p id={id} className="campo-ator__ajuda">
-      {selecionado
-        ? `Atuou em ${pluralizar(selecionado.filmes, 'filme', 'filmes')} desta base`
-        : `Busque entre ${formatarNumero(totalAtores)} atores, com ou sem acento`}
+      {selecionado && `Atuou em ${pluralizar(selecionado.filmes, 'filme', 'filmes')} desta base`}
     </p>
   );
 }
@@ -180,7 +178,7 @@ export default function CampoAtor({ id, rotulo, placeholder, valor, erro, indice
         )}
       </div>
 
-      <Ajuda id={idAjuda} erro={erro} selecionado={selecionado} totalAtores={indice.total} />
+      <Ajuda id={idAjuda} erro={erro} selecionado={selecionado} />
     </div>
   );
 }

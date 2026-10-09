@@ -1,51 +1,54 @@
 # 8 Graus de Network
 
-Aplicação em React + Vite que encontra o relacionamento mais próximo entre dois atores usando Busca em Largura (BFS) em um grafo de filmes e atores.
+Descubra como dois atores se conectam pelos filmes em que atuaram juntos. A aplicação monta um grafo de atores e filmes e usa **Busca em Largura (BFS)** para encontrar o caminho entre eles.
 
-## Como executar
+Feita com React + Vite.
 
-bash
+## Como rodar
+
+```bash
 npm install
 npm run dev
+```
 
-Depois, abra `http://localhost:5173`.
+Abra `http://localhost:5173`.
 
-## Modelagem do grafo
+## Como funciona
 
-- Cada filme e cada ator é um **vértice**; cada participação de um ator em um filme é uma **aresta**.
-- O grafo é **não direcionado** e usa **lista de adjacências** (`Map<vértice, vértice[]>`): toda aresta é registrada no filme e no ator.
-- A base `latest_movies.json` gera **10.375 vértices** (8.905 atores e 1.470 filmes) e **14.323 arestas**.
-- Filmes com o mesmo título são vértices diferentes, identificados pelo `id` do JSON.
+- Cada **ator** e cada **filme** é um vértice. Cada participação de um ator em um filme é uma aresta.
+- O grafo é não direcionado e guardado como **lista de adjacências**.
+- A base `src/latest_movies.json` gera **8.905 atores**, **1.447 filmes**, **10.352 vértices** e **14.315 arestas**. Filmes com o mesmo título viram um único vértice.
+- Como o caminho sempre alterna ator → filme → ator, ele tem número par de arestas: 2 arestas = 1 grau de separação.
 
-## Funções do grafo (`src/Grafo.js`)
+## As duas buscas
 
-| Função | Descrição |
-| `seed(filmes)` | Carrega o JSON no grafo, ignorando filmes sem título ou sem elenco e nomes vazios ou repetidos. |
-| `show()` | Exibe no console cada vértice e a sua lista de adjacentes. |
-| `bfs(origem, destino)` | Busca em Largura padrão. Retorna o caminho mínimo e quantos vértices foram visitados. Complexidade O(V + E). |
-| `bfsAdaptada(origem, destino, 8)` | BFS em que a fila guarda caminhos em vez de vértices. Lista, do mais curto ao mais longo, todos os caminhos simples com até 8 arestas. Uma BFS a partir do destino calcula as distâncias usadas para descartar ramos que não chegariam ao destino dentro do limite. |
+| Busca | O que faz |
+| --- | --- |
+| **BFS** | Encontra o caminho mais curto entre os dois atores. |
+| **BFS Adaptada** | Lista todos os caminhos com até 8 arestas, do mais curto ao mais longo. |
 
-Como o grafo é bipartido (ator → filme → ator), um caminho entre dois atores sempre tem comprimento par: 8 arestas equivalem a até 4 filmes e 3 atores intermediários.
+As funções ficam em `src/Grafo.js`: `seed()` carrega a base, `show()` imprime a lista de adjacências no console, `bfs()` e `bfsAdaptada()` fazem as buscas.
 
-## Interface
+## Na tela
 
-- Campos de origem e destino com sugestões alimentadas pelos vértices de atores, busca sem acento e navegação por teclado.
-- Botão para a BFS padrão (caminho mínimo) e botão para a BFS adaptada (todos os caminhos com até 8 arestas).
-- Resultado com o caminho percorrido, o comprimento, os graus de separação e um resumo em texto de como os atores se conectam.
-- Na BFS adaptada, filtro por comprimento e paginação dos caminhos.
-- Mensagens para atores não encontrados, atores sem relacionamento e caminhos acima do limite de 8 arestas.
-- Painel com a lista de adjacências, filtro por nome e tipo, e botão que executa `show()` no console.
-- Tema claro ou escuro conforme o sistema e layout adaptado para celular.
+- Campos com sugestões de atores, busca com ou sem acento e atalhos de exemplo.
+- Resultado com o caminho desenhado, métricas e um resumo de como os atores se conectam.
+- Lista de adjacências com filtro por nome e por tipo (atores ou filmes).
+- Tema claro e escuro automático, layout para celular e botão de voltar ao topo.
 
 ## Estrutura
 
+```
 src/
- Grafo.js              estrutura de dados e algoritmos
- servicos/rede.js      carga da base, índice de atores e execução das buscas
- componentes/          componentes da interface
- utils/                normalização de texto e formatação
- App.jsx               tela principal
- App.css               estilos dos componentes
- index.css             tema e estilos globais
- main.jsx              ponto de entrada
+  Grafo.js          grafo e algoritmos de busca
+  servicos/rede.js  carga da base e execução das buscas
+  componentes/      componentes da interface
+  utils/            busca sem acento e formatação
+  App.jsx           tela principal
+  App.css           estilos dos componentes
+  index.css         cores, fontes e estilos globais
+```
 
+## Créditos
+
+A fonte dos títulos, `public/fontes/bonum-condensada-bold.woff2`, é uma versão condensada da [TeX Gyre Bonum](https://www.gust.org.pl/projects/e-foundry/tex-gyre/bonum), distribuída sob a GUST Font License.

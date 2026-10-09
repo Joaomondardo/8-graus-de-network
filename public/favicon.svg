@@ -1,13 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <defs>
-    <linearGradient id="fundo" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#6a58ee" />
-      <stop offset="1" stop-color="#2f80ed" />
-    </linearGradient>
-  </defs>
-  <rect width="64" height="64" rx="16" fill="url(#fundo)" />
-  <path d="M29.4 22.4 20.6 38.6M34.6 22.4l8.8 16.2M24 44h16" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" />
-  <circle cx="32" cy="17" r="6" fill="#fff" />
-  <circle cx="18" cy="44" r="6" fill="#fff" />
-  <circle cx="46" cy="44" r="6" fill="#fff" />
+  <rect width="64" height="64" rx="10" fill="#2e3b28" />
+  <path d="M29.4 22.4 20.6 38.6M34.6 22.4l8.8 16.2M24 44h16" fill="none" stroke="#efe9dd" stroke-width="3" stroke-linecap="round" />
+  <circle cx="32" cy="17" r="6" fill="#d98b63" />
+  <circle cx="18" cy="44" r="6" fill="#efe9dd" />
+  <circle cx="46" cy="44" r="6" fill="#efe9dd" />
 </svg>

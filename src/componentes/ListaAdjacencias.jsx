@@ -1,7 +1,6 @@
 import { useMemo, useRef, useState } from 'react';
 import { ATOR, FILME } from '../Grafo';
 import Vertice from './Vertice';
-import { IconeExpandir, IconeLista, IconeTerminal } from './Icones';
 import { filtrarPorRelevancia, normalizar } from '../utils/busca';
 import { formatarNumero, pluralizar } from '../utils/formatacao';
 
@@ -17,7 +16,6 @@ function ExploradorAdjacencias({ grafo }) {
   const [busca, setBusca] = useState('');
   const [tipo, setTipo] = useState(TODOS);
   const [quantidade, setQuantidade] = useState(POR_PAGINA);
-  const [mensagem, setMensagem] = useState('');
   const controlesRef = useRef(null);
 
   const entradas = useMemo(
@@ -50,20 +48,8 @@ function ExploradorAdjacencias({ grafo }) {
     controlesRef.current?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   };
 
-  const exibirNoConsole = () => {
-    grafo.show();
-    setMensagem(
-      `${formatarNumero(grafo.adjacencias.size)} vértices exibidos no console do navegador (F12 › Console).`,
-    );
-  };
-
   return (
     <div className="adjacencias__conteudo">
-      <p className="adjacencias__descricao">
-        Cada vértice aparece com a sua lista de adjacentes. Como o grafo é não direcionado, toda aresta entre
-        filme e ator aparece nas duas listas. Clique em um adjacente para navegar até ele.
-      </p>
-
       <div ref={controlesRef} className="adjacencias__controles">
         <input
           type="search"
@@ -81,18 +67,7 @@ function ExploradorAdjacencias({ grafo }) {
             </button>
           ))}
         </div>
-
-        <button type="button" className="botao-pequeno" onClick={exibirNoConsole}>
-          <IconeTerminal />
-          Exibir no console
-        </button>
       </div>
-
-      {mensagem && (
-        <p className="adjacencias__mensagem" role="status">
-          {mensagem}
-        </p>
-      )}
 
       {visiveis.length === 0 ? (
         <p className="adjacencias__vazio">Nenhum vértice encontrado com esse nome.</p>
@@ -137,22 +112,16 @@ function ExploradorAdjacencias({ grafo }) {
 }
 
 export default function ListaAdjacencias({ grafo }) {
-  const [aberta, setAberta] = useState(false);
-
   return (
-    <details className="cartao adjacencias" onToggle={(evento) => setAberta(evento.currentTarget.open)}>
-      <summary className="adjacencias__resumo">
-        <span className="adjacencias__icone">
-          <IconeLista />
-        </span>
-        <span className="adjacencias__titulo">
-          <strong>Lista de adjacências</strong>
-          <small>Explore os vértices do grafo e seus adjacentes, como na função show()</small>
-        </span>
-        <IconeExpandir className="adjacencias__seta" />
-      </summary>
+    <section className="cartao adjacencias" aria-labelledby="titulo-adjacencias">
+      <header className="cartao__cabecalho">
+        <div>
+          <h2 id="titulo-adjacencias">Lista de adjacências</h2>
+          <p className="cartao__descricao">Explore os vértices do grafo e seus adjacentes, como na função show()</p>
+        </div>
+      </header>
 
-      {aberta && <ExploradorAdjacencias grafo={grafo} />}
-    </details>
+      <ExploradorAdjacencias grafo={grafo} />
+    </section>
   );
 }

@@ -1,55 +1,44 @@
+@font-face {
+  font-family: 'Bonum Condensada';
+  src: url('/fontes/bonum-condensada-bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   color-scheme: light dark;
 
-  --fonte: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --fonte-display: 'Bonum Condensada', 'Bookman Old Style', 'Bookman', Georgia, serif;
+  --fonte-titulo: 'Newsreader', 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  --fonte-texto: 'Schibsted Grotesk', 'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
 
-  --cor-fundo: #f4f5fa;
-  --cor-brilho: rgb(91 75 219 / 0.14);
-  --cor-superficie: #ffffff;
-  --cor-superficie-alt: #f2f3f8;
-  --cor-borda: #e3e5ee;
-  --cor-borda-forte: #cdd1de;
-  --cor-texto: #171a26;
-  --cor-texto-suave: #4f566a;
-  --cor-texto-fraco: #6b7287;
+  --fundo: #efe9dd;
+  --tinta: #2e3b28;
+  --acento: #9c4b2c;
+  --grao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .18 0 0 0 0 .23 0 0 0 0 .16 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='.09'/%3E%3C/svg%3E");
 
-  --cor-primaria: #5b4bdb;
-  --cor-primaria-suave: #edebfd;
-  --cor-botao: #5b4bdb;
-  --cor-botao-hover: #4a3bc6;
-  --cor-gradiente: #2f80ed;
+  --cor-fundo: var(--fundo);
+  --cor-papel: color-mix(in srgb, var(--tinta) 5%, var(--fundo));
+  --cor-papel-forte: color-mix(in srgb, var(--tinta) 10%, var(--fundo));
+  --cor-texto: var(--tinta);
+  --cor-texto-suave: color-mix(in srgb, var(--tinta) 85%, var(--fundo));
+  --cor-texto-fraco: color-mix(in srgb, var(--tinta) 78%, var(--fundo));
+  --cor-linha: color-mix(in srgb, var(--tinta) 18%, var(--fundo));
+  --cor-linha-forte: color-mix(in srgb, var(--tinta) 42%, var(--fundo));
+  --cor-acento: var(--acento);
+  --cor-acento-texto: color-mix(in srgb, var(--acento) 78%, var(--tinta));
+  --cor-acento-suave: color-mix(in srgb, var(--acento) 12%, var(--fundo));
+  --cor-acento-linha: color-mix(in srgb, var(--acento) 45%, var(--fundo));
 
-  --cor-filme: #c27a12;
-  --cor-filme-icone: #ffffff;
-  --cor-filme-texto: #8f5200;
-  --cor-filme-suave: #fff5e3;
-  --cor-filme-borda: #f1d6a6;
+  --sombra-impressa: 6px 6px 0 color-mix(in srgb, var(--tinta) 14%, transparent);
+  --raio: 3px;
 
-  --cor-sucesso: #12805c;
-  --cor-sucesso-suave: #e2f5ec;
-  --cor-erro: #c43c3c;
-  --cor-erro-suave: #fdeaea;
-  --cor-alerta: #8f5200;
-  --cor-alerta-suave: #fff2dc;
-
-  --avatar-fundo-s: 70%;
-  --avatar-fundo-l: 91%;
-  --avatar-texto-s: 50%;
-  --avatar-texto-l: 32%;
-
-  --sombra-cartao: 0 1px 2px rgb(23 26 38 / 0.04), 0 12px 32px -16px rgb(23 26 38 / 0.18);
-  --sombra-flutuante: 0 18px 40px -12px rgb(23 26 38 / 0.3);
-  --anel-foco: 0 0 0 4px rgb(91 75 219 / 0.18);
-
-  --raio-pequeno: 10px;
-  --raio: 14px;
-  --raio-grande: 20px;
-
-  font-family: var(--fonte);
+  font-family: var(--fonte-texto);
   font-size: 16px;
-  line-height: 1.5;
+  line-height: 1.55;
   color: var(--cor-texto);
-  background: var(--cor-fundo);
+  background-color: var(--cor-fundo);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -58,43 +47,12 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --cor-fundo: #0b0d13;
-    --cor-brilho: rgb(124 108 255 / 0.2);
-    --cor-superficie: #131621;
-    --cor-superficie-alt: #1a1e2b;
-    --cor-borda: #252a3a;
-    --cor-borda-forte: #353b50;
-    --cor-texto: #eceef5;
-    --cor-texto-suave: #a7adbf;
-    --cor-texto-fraco: #8088a0;
+    --fundo: #1a2017;
+    --tinta: #e6dfcf;
+    --acento: #d98b63;
+    --grao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .9 0 0 0 0 .87 0 0 0 0 .81 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='.05'/%3E%3C/svg%3E");
 
-    --cor-primaria: #a497ff;
-    --cor-primaria-suave: rgb(143 128 255 / 0.15);
-    --cor-botao: #6a58ee;
-    --cor-botao-hover: #7a6af5;
-    --cor-gradiente: #6ec1ff;
-
-    --cor-filme: #f2b552;
-    --cor-filme-icone: #2b1d05;
-    --cor-filme-texto: #f5c26b;
-    --cor-filme-suave: rgb(242 181 82 / 0.1);
-    --cor-filme-borda: rgb(242 181 82 / 0.32);
-
-    --cor-sucesso: #4cd79b;
-    --cor-sucesso-suave: rgb(76 215 155 / 0.12);
-    --cor-erro: #ff8080;
-    --cor-erro-suave: rgb(255 128 128 / 0.12);
-    --cor-alerta: #f5c26b;
-    --cor-alerta-suave: rgb(245 194 107 / 0.12);
-
-    --avatar-fundo-s: 35%;
-    --avatar-fundo-l: 27%;
-    --avatar-texto-s: 80%;
-    --avatar-texto-l: 84%;
-
-    --sombra-cartao: inset 0 1px 0 rgb(255 255 255 / 0.03), 0 16px 40px -20px rgb(0 0 0 / 0.7);
-    --sombra-flutuante: 0 24px 48px -12px rgb(0 0 0 / 0.75);
-    --anel-foco: 0 0 0 4px rgb(164 151 255 / 0.22);
+    --sombra-impressa: 6px 6px 0 rgb(0 0 0 / 0.35);
   }
 }
 
@@ -107,9 +65,8 @@
 body {
   min-height: 100vh;
   margin: 0;
-  background:
-    radial-gradient(900px 480px at 50% -160px, var(--cor-brilho), transparent 70%),
-    var(--cor-fundo);
+  background-color: var(--cor-fundo);
+  background-image: var(--grao);
 }
 
 h1,
@@ -130,13 +87,23 @@ button {
   cursor: pointer;
 }
 
+svg {
+  stroke-width: 1.6;
+}
+
+em,
+cite {
+  font-style: italic;
+}
+
 :focus-visible {
-  outline: 2px solid var(--cor-primaria);
-  outline-offset: 2px;
+  outline: 2px solid var(--cor-acento);
+  outline-offset: 3px;
 }
 
 ::selection {
-  background: var(--cor-primaria-suave);
+  background: color-mix(in srgb, var(--acento) 28%, var(--fundo));
+  color: var(--cor-texto);
 }
 
 .visualmente-oculto {
@@ -154,7 +121,7 @@ button {
 @keyframes surgir {
   from {
     opacity: 0;
-    transform: translateY(6px);
+    transform: translateY(8px);
   }
 
   to {

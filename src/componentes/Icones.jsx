@@ -81,9 +81,10 @@ export const IconeSeta = (props) => (
   </Svg>
 );
 
-export const IconeExpandir = (props) => (
+export const IconeSubir = (props) => (
   <Svg {...props}>
-    <path d="m6 9 6 6 6-6" />
+    <path d="M12 19V5" />
+    <path d="m6 11 6-6 6 6" />
   </Svg>
 );
 
@@ -106,22 +107,5 @@ export const IconeDesconectado = (props) => (
   <Svg {...props}>
     <circle cx="12" cy="12" r="9" />
     <path d="m5.6 5.6 12.8 12.8" />
-  </Svg>
-);
-
-export const IconeLista = (props) => (
-  <Svg {...props}>
-    <path d="M9 6h11M9 12h11M9 18h11" />
-    <circle cx="4.5" cy="6" r="1" fill="currentColor" />
-    <circle cx="4.5" cy="12" r="1" fill="currentColor" />
-    <circle cx="4.5" cy="18" r="1" fill="currentColor" />
-  </Svg>
-);
-
-export const IconeTerminal = (props) => (
-  <Svg {...props}>
-    <rect x="3" y="4" width="18" height="16" rx="2" />
-    <path d="m7 9 3 3-3 3" />
-    <path d="M13 15h4" />
   </Svg>
 );

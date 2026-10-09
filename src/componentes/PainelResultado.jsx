@@ -1,7 +1,5 @@
-import Aviso from './Aviso';
 import ResultadoCaminhoMinimo from './ResultadoCaminhoMinimo';
 import ResultadoTodosCaminhos from './ResultadoTodosCaminhos';
-import { IconeRede } from './Icones';
 import { BUSCA_PADRAO, MAX_ARESTAS } from '../servicos/rede';
 import { pluralizar } from '../utils/formatacao';
 
@@ -23,26 +21,23 @@ export default function PainelResultado({ resultado, onVerCaminhoMinimo, ref }) 
   const ehBuscaPadrao = resultado?.tipo === BUSCA_PADRAO;
 
   return (
-    <section ref={ref} className="cartao resultado" aria-labelledby="titulo-resultado">
-      <header className="cartao__cabecalho">
-        <h2 id="titulo-resultado">Resultado</h2>
-        {resultado && (
+    <section
+      ref={ref}
+      className={resultado ? 'cartao resultado' : 'resultado resultado--vazio'}
+      aria-labelledby={resultado ? 'titulo-resultado' : undefined}
+    >
+      {resultado && (
+        <header className="cartao__cabecalho">
+          <h2 id="titulo-resultado">Resultado</h2>
           <span className="selo selo--primario">
             {ehBuscaPadrao ? 'Busca em Largura (BFS)' : `BFS adaptada · até ${MAX_ARESTAS} arestas`}
           </span>
-        )}
-      </header>
+        </header>
+      )}
 
       <p className="visualmente-oculto" role="status">
         {descreverResultado(resultado)}
       </p>
-
-      {!resultado && (
-        <Aviso icone={IconeRede} titulo="Pronto para explorar" tom="inicial">
-          Escolha um ator de origem e um de destino e execute uma das buscas. O caminho entre eles vai aparecer
-          aqui.
-        </Aviso>
-      )}
 
       {resultado && ehBuscaPadrao && <ResultadoCaminhoMinimo key={resultado.id} resultado={resultado} />}
 
